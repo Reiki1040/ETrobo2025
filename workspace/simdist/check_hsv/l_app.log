@@ -1,0 +1,102 @@
+core id num=1
+ROM : START=0x0 SIZE=2048
+RAM : START=0x200000 SIZE=2048
+RAM : START=0x5ff7000 SIZE=10240
+RAM : START=0x7ff7000 SIZE=10240
+ELF SET CACHE RIGION:addr=0x0 size=80 [KB]
+Elf loading was succeeded:0x0 - 0x14174 : 80.372 KB
+Elf loading was succeeded:0x14174 - 0x14648 : 1.212 KB
+ELF SYMBOL SECTION LOADED:index=21
+ELF SYMBOL SECTION LOADED:sym_num=1055
+ELF STRING TABLE SECTION LOADED:index=22
+[ l_app runner: V850E2M VCPU is powered on ]
+DEBUG_FUNC_VDEV_TX_IPADDR = 127.0.0.1
+VDEV:TX IPADDR=127.0.0.1
+VDEV:TX PORTNO=54001
+VDEV:RX IPADDR=127.0.0.1
+VDEV:RX PORTNO=54002
+DEVICE_CONFIG_COMPLEMENTAL_TX_SENDING=1
+DEVICE_CONFIG_RESET_AREA_OFFSET=68
+DEVICE_CONFIG_RESET_AREA_SIZE=20
+DEBUG_FUNC_FT_LOG_SIZE=1024
+athrill_device_func_call=0x2004d0
+[ l_app runner: Athrill2 is booted up ]
+brick_dri initialized.
+_____   ______ ___  ______
+/ __/ | / /_  // _ /_  __/
+/ _/ | |/ //_ </ , _/ / /
+/___/ |___/____/_/|_| /_/
+
+====================>Beta 7<=
+
+Powered by TOPPERS/ASP3 RTOS of Hakoniwa
+Initialization is completed..
+[ l_app runner: EV3RT is booted up ]
+[ l_app runner: EV3RT boot time: 0 secs. ]
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H:   0, S:   0, V:   0
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 164
+H: 243, S:  29, V: 230
+H: 243, S:  29, V: 148
+H: 243, S:  28, V: 110
+H: 242, S:  28, V:  57
+H: 237, S:  32, V: 211
+H: 226, S:  49, V: 225
+H: 223, S:  59, V: 170
+H: 222, S:  63, V:  87
+H: 221, S:  66, V:  44
+H: 221, S:  67, V: 125
+H: 221, S:  67, V: 160
+H: 221, S:  67, V: 168
+H: 221, S:  67, V: 188
+H: 221, S:  67, V: 189
+H: 221, S:  67, V: 192
+H: 221, S:  67, V: 187
+H: 221, S:  67, V: 179
+H: 221, S:  67, V: 180
+H: 221, S:  66, V: 175
+H: 221, S:  66, V: 171
+H: 221, S:  66, V: 170
+H: 221, S:  66, V: 186
+H: 221, S:  66, V: 189
+H: 221, S:  65, V: 210
+H: 221, S:  65, V: 202
+H: 221, S:  65, V: 217
+H: 221, S:  65, V: 206
+H: 221, S:  65, V: 206
+H: 221, S:  65, V: 206
+[ l_app runner: exit: Athrill2 was shutted down ]
+[ l_app runner: duration of running: 13 secs in real-world time ]

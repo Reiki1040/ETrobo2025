@@ -1,0 +1,20 @@
+core id num=1
+ROM : START=0x0 SIZE=2048
+RAM : START=0x200000 SIZE=2048
+RAM : START=0x5ff7000 SIZE=10240
+RAM : START=0x7ff7000 SIZE=10240
+ELF SET CACHE RIGION:addr=0x0 size=81 [KB]
+Elf loading was succeeded:0x0 - 0x14528 : 81.296 KB
+Elf loading was succeeded:0x14528 - 0x149fc : 1.212 KB
+ELF SYMBOL SECTION LOADED:index=21
+ELF SYMBOL SECTION LOADED:sym_num=1058
+ELF STRING TABLE SECTION LOADED:index=22
+[ l_app runner: V850E2M VCPU is powered on ]
+DEBUG_FUNC_VDEV_TX_IPADDR = 127.0.0.1
+VDEV:TX IPADDR=127.0.0.1
+VDEV:TX PORTNO=54001
+VDEV:RX IPADDR=127.0.0.1
+VDEV:RX PORTNO=54002
+ASSERTION FAILED:../src/device/peripheral/vdev/vdev_udp.c:device_init_vdev_udp:106:err == STD_E_OK
+[ l_app runner: exit: Athrill2 was shutted down ]
+[ l_app runner: duration of running: 1 secs in real-world time ]
