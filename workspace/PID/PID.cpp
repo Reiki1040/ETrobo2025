@@ -1,5 +1,5 @@
 //速度調整PID制御
-float PID(float v,float a_meas,float cycle_ms){
+float PID(float v,float a,float cycle_ms){
   float target_v=100.0f; //目標速度[cm/s]
   float KP=0.8f;
   float KI=0.6f;
@@ -26,7 +26,7 @@ float PID(float v,float a_meas,float cycle_ms){
 
   //D制御:測定した加速度を使用
 
-  float out_power=KP*e+KI*I-KD*a_meas; 
+  float out_power = KP * e + KI * I - KD * a; 
   //出力= Kp・e +　Ki・I − Kd・a
 
   //出力制限
