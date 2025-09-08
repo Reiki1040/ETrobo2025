@@ -4,8 +4,8 @@ float PID(float v,float a,float cycle_ms){
   float KP=0.8f;
   float KI=0.6f;
   float KD=0.5f;
-  const float OUT_MIN=0.0f, OUT_MAX=100.0f; //出力範囲
-  const float I_MAX=400.0f; //積分上限
+  float OUT_MIN=0.0f, OUT_MAX=100.0f; //出力範囲
+  float I_MAX=400.0f; //積分上限
   static float I=0.0f; //積分状態
 
   float dt=cycle_ms*0.001f; //Δt、ms→s
