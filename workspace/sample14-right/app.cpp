@@ -31,6 +31,7 @@ const int TARGET_BLUE = 21;  //青ライントレース時の反射値目標値
 const float INTEGRAL_MAX = 100.0f; //積分値MAX
 
 // 障害物回避用パラメータ
+bool CAN_AVOID = true; //回避動作可能かどうか
 const int OBSTACLE_THRESHOLD_CM = 200; // この距離(mm)より手前に障害物があれば回避
 const int AVOIDANCE_TURN_POWER = 48;  // 回避時の旋回速度
 
@@ -88,7 +89,7 @@ extern "C" void main_task(intptr_t exinf) {
 //-------------------------------------------------------------------------
 // ★★★ここから障害物回避ロジックを追加★★★
 //-------------------------------------------------------------------------
-if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
+if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM && CAN_AVOID) {//検知範囲内に障害物があって、かつCAN_AVOIDがtrueなら回避動作
   printf("Obstacle detected! Starting avoidance maneuver.\n");
 
   // 1. その場で停止
@@ -98,11 +99,11 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
 
   // 2. 右に旋回
   printf("右に旋回...\n");
-  leftWheel.setPower(-AVOIDANCE_TURN_POWER);
-  rightWheel.setPower(AVOIDANCE_TURN_POWER);
+  leftWheel.setPower(AVOIDANCE_TURN_POWER);
+  rightWheel.setPower(-AVOIDANCE_TURN_POWER);
   clock.sleep(1500 * 1000);
 
-  // 3. 1秒間前進
+  // 3.前進
   printf("直進...\n");
   leftWheel.setPower(BASE_POWER);
   rightWheel.setPower(BASE_POWER);
@@ -110,8 +111,8 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
 
   // 4. 左に旋回
   printf("左に旋回...\n");
-  leftWheel.setPower(AVOIDANCE_TURN_POWER);
-  rightWheel.setPower(-AVOIDANCE_TURN_POWER);
+  leftWheel.setPower(-AVOIDANCE_TURN_POWER);
+  rightWheel.setPower(AVOIDANCE_TURN_POWER);
   clock.sleep(1500 * 1000);
 
   // 5. 黒ラインを検出するまで低速で前進
@@ -124,10 +125,14 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
   }
 
   // ラインを見つけたら停止
-  printf("黒ライン検出.\n");
+  printf("黒ライン検出. 一時停止\n");
   leftWheel.stop();
   rightWheel.stop();
-  clock.sleep(400 * 1000);
+
+  CAN_AVOID = false; //連続検知して回避動作を実行してしまうのを防ぐため
+
+  clock.sleep(500 * 1000);
+  
 
   // PID制御の変数をリセットして、次回ループから正常にトレースを再開
   integral = 0;
@@ -139,8 +144,6 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
 //-------------------------------------------------------------------------
 // ★★★障害物回避ロジックここまで★★★
 //-------------------------------------------------------------------------
-
-
 
 // 現在の状態に応じてパラメータを選択
 float Kp, Ki, Kd;
@@ -203,6 +206,12 @@ if (currentState == RobotState::TRACE_BLACK) {
     printf("黒ライン検出：黒ラインへ\n");
     currentState = RobotState::TRACE_BLACK;
     lap_count++;
+
+    if ( lap_count == 4){
+      CAN_AVOID = true;
+    }
+
+
     previousError = TARGET_BLACK - colorSensor.getReflection();
     integral = 0;
   }
@@ -216,7 +225,7 @@ if (lap_count >= 1 && lap_count <= 3) {
   currentBasePower = BASE_POWER;
 }
 
-bool trace_on_right_edge = (lap_count <= 1) || (lap_count >= 2 && lap_count % 2 != 0);
+bool trace_on_right_edge = (lap_count == 0 || lap_count == 1) || (lap_count >= 2 && lap_count % 2 != 0); //右エッジトレースをするlap_count
 
 int leftPower, rightPower;
 if (trace_on_right_edge) {
