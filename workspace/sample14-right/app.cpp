@@ -85,7 +85,6 @@ extern "C" void main_task(intptr_t exinf) {
 
   while (1) {
 
-/*
 //-------------------------------------------------------------------------
 // ★★★ここから障害物回避ロジックを追加★★★
 //-------------------------------------------------------------------------
@@ -97,8 +96,8 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
   rightWheel.stop();
   clock.sleep(200 * 1000);
 
-  // 2. 左に1秒間その場で旋回
-  printf("左に旋回...\n");
+  // 2. 右に旋回
+  printf("右に旋回...\n");
   leftWheel.setPower(-AVOIDANCE_TURN_POWER);
   rightWheel.setPower(AVOIDANCE_TURN_POWER);
   clock.sleep(1500 * 1000);
@@ -109,16 +108,16 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
   rightWheel.setPower(BASE_POWER);
   clock.sleep(1800 * 1000);
 
-  // 4. 右に2秒間その場で旋回
-  printf("右に旋回...\n");
+  // 4. 左に旋回
+  printf("左に旋回...\n");
   leftWheel.setPower(AVOIDANCE_TURN_POWER);
   rightWheel.setPower(-AVOIDANCE_TURN_POWER);
-  clock.sleep(1800 * 1000);
+  clock.sleep(1500 * 1000);
 
   // 5. 黒ラインを検出するまで低速で前進
   printf("黒ラインを検出するまで直進...\n");
-  leftWheel.setPower(SLOW_POWER);
-  rightWheel.setPower(SLOW_POWER);
+  leftWheel.setPower(SLOW_POWER - 5);
+  rightWheel.setPower(SLOW_POWER - 5);
   while(colorSensor.getReflection() > TARGET_BLACK) {
       // ラインを見つけるまでループ
       clock.sleep(CONTROL_INTERVAL);
@@ -128,7 +127,7 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
   printf("黒ライン検出.\n");
   leftWheel.stop();
   rightWheel.stop();
-  clock.sleep(500 * 1000);
+  clock.sleep(400 * 1000);
 
   // PID制御の変数をリセットして、次回ループから正常にトレースを再開
   integral = 0;
@@ -140,7 +139,8 @@ if (ultrasonicSensor.getDistance() < OBSTACLE_THRESHOLD_CM) {
 //-------------------------------------------------------------------------
 // ★★★障害物回避ロジックここまで★★★
 //-------------------------------------------------------------------------
-*/
+
+
 
 // 現在の状態に応じてパラメータを選択
 float Kp, Ki, Kd;
